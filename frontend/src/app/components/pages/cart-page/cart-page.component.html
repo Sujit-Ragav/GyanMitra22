@@ -1,0 +1,36 @@
+
+  <div  class="container">
+    <ul>
+      <li *ngFor="let cartItem of cart.items">
+        <div>
+          <img [src]="cartItem.product.imageUrl" [alt]="cartItem.product.name">
+        </div>
+        <div>
+          <a routerLink="/food/{{cartItem.product.id}}">
+            {{cartItem.product.name}}
+          </a>
+        </div>
+  
+  
+        <div>
+          <button class="remove-button" (click)="removeFromCart(cartItem)">
+            Remove
+          </button>
+        </div>
+      </li>
+      <li>
+          <a routerLink="/">Continue Participating</a>
+      </li>
+    </ul>
+    
+    <div class="checkout">
+      <div *ngFor="let cartItem of cart.items">
+      <div *ngIf="cartItem.product.tname=='workshop'"><h3>Workshop Fee:{{cartItem.product.price}}</h3></div>
+      <div *ngIf="cartItem.product.tname=='event' || cartItem.product.tname=='groupevent'"><h3>Event Fee:200</h3></div>
+      </div>
+    <div class="total-price">{{cart.totalPrice|currency:'INR'}}</div>
+  
+      <a routerLink="/checkout">Proceed to Checkout</a>
+    </div>
+    </div>
+  

@@ -1,0 +1,30 @@
+.container{
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),  url('../../../../assets/Register.jpeg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+app-title{
+  opacity: 1;
+  color: white;
+}
+
+.details{
+  width: 25rem;
+  margin: 1em;
+}
+
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select{
+  margin-top: .5em;
+  height: 4.7rem;
+  width: 25rem;
+  border-radius: 1rem;
+  border-color: rgb(223, 221, 221);
+}

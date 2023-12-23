@@ -1,0 +1,179 @@
+<div class="container">
+
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+  <div *ngIf="!user.isAdmin">
+  <div class="details">
+    <h1>Details</h1>
+    <div class="c1">
+      <h1>Name:</h1>
+      <p id="name">{{user.name}}</p>
+    </div>
+    <div class="c1">
+      <h3>Email:</h3>
+      <p id="mail">{{user.email}}</p>
+    </div>
+    <div class="c1">
+      <h3>Year:</h3>
+      <p>{{user.year}}</p>
+    </div>
+    <div class="c1">
+      <h3>Department:</h3>
+      <p>{{user.department}}</p>
+    </div>
+    <div class="c1">
+      <h3>College:</h3>
+      <p>{{user.college}}</p>
+    </div>
+
+  </div>
+
+  <div class="flexing">
+
+  <div class="workshop">
+    <h2>Workshop</h2>
+    <div class="workshopName">
+      <li>{{this.workshopName}}</li>
+    </div>
+  <br><br><br>
+    <div class="payments">
+      <h4 *ngIf="user.isPayed">Workshop:{{this.workshopName}}<br>Workshop Fee:<br>PAID</h4>
+      <div *ngIf="!user.isPayed">
+      <h4>Workshop Fee:&nbsp;{{this.workshopPrice}}+ 4% Transaction charge</h4>
+     <button (click)="workshopPay()">pay</button>
+    </div>
+    </div>
+  </div>
+
+  <div class="events">
+    <h2>Events</h2>
+    <div class="eventNames" *ngFor="let event of this.eventNames">
+    <li>{{event}}</li>
+    </div>
+    <div class="payments">
+      <h4 *ngIf="user.eventPay">Events Fee:<br>PAID</h4>
+      <div *ngIf="!user.eventPay">
+      <h4>Event Fee:&nbsp;200 + 4% Transaction charge</h4>
+      <button (click)="eventPay()">pay</button>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <div *ngIf="user.isAdmin && (user.email==='pramakarthick@gmail.com') " class="admin">
+    <button  (click)="change()">Participant List</button><button  (click)="accomdation()">Accomdation List</button><button  (click)="paymentList()">Payment List</button>
+    <div *ngIf="isSearch && particularUser ; else nosuchuser">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>College</th>
+          <th>Event Fee:</th>
+          <th>Workshop</th>
+          <th>Workshop Fee:</th>
+          <th>Accomdation</th>
+          <th>Contact</th>
+        </tr>
+        <tr>
+          <td>{{particularUser.name}}</td>
+          <td>{{particularUser.email}}</td>
+          <td>{{particularUser.college}}</td>
+          <td><h4 *ngIf="particularUser.eventPay">PAID</h4></td>
+          <td>{{particularUser.workshop}}</td>
+          <td><h4 *ngIf="particularUser.isPayed">PAID</h4></td>
+          <td>{{particularUser.accomdation}}</td>
+          <td>{{particularUser.phone_number}}</td>
+        </tr>
+      </table>
+      </div>
+      <ng-template #nosuchuser>
+        <h2>Mail id Doesn't Match</h2>
+      </ng-template>
+    <br><label>Search By Email</label>
+    <br><input #searchemail  type="text">
+    <button (click)="clickme(searchemail.value)">Search</button>
+
+    <div *ngIf="this.list">
+      <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+        <i class="fa-solid fa-file-export"></i> Export to Excel
+    </button>
+    <h3>No of Students:{{this.count}}</h3>
+    <table class="table table-hover table-condensed table-striped" id="participantsTable">
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>College</th>
+        <th>Contact</th>
+      </tr>
+
+      <tr *ngFor="let person of participantLists">
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.college}}</td>
+        <td>{{person.phone_number}}</td>
+      </tr>
+
+    </table>
+
+    </div>
+    <div *ngIf="this.Alist">
+      <button class="btn btn-primary" style="float: right;" (click)="exportExcel()">
+        <i class="fa-solid fa-file-export"></i> Export to Excel
+    </button>
+    <h3>No of Students:{{this.count}}</h3>
+    <table class="table table-hover table-condensed table-striped" id="accomTable">
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>College</th>
+        <th>Accomdation</th>
+        <th>Gender</th>
+      </tr>
+
+      <tr *ngFor="let person of participantList">
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.college}}</td>
+        <td>{{person.accomdation}}</td>
+        <td>{{person.gender}}</td>
+      </tr>
+
+    </table>
+
+    </div>
+    <div *ngIf="this.Plist">
+      <button class="btn btn-primary" style="float: right;" (click)="printPayList()">
+        <i class="fa-solid fa-file-export"></i> Export to Excel
+    </button>
+    <h3>No of Students:{{this.count}}</h3>
+    <table class="table table-hover table-condensed table-striped" id="paymentTable">
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>College</th>
+        <!-- <th>Workshop</th>
+        <th>Workshop Fee:</th> -->
+        <th>Events</th>
+        <th>Event Fee:</th>
+      </tr>
+
+      <tr *ngFor="let person of participantList">
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.college}}</td>
+        <!-- <td>{{person.workshop}}</td>
+        <td><h4 *ngIf="person.isPayed">PAID</h4></td> -->
+        <td *ngIf="person.eventPay">{{person.event}}</td>
+        <td><h4 *ngIf="person.eventPay">PAID</h4></td>
+      </tr>
+
+    </table>
+
+    </div>
+  </div>
+
+  </div>
+
+

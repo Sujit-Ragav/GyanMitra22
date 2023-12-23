@@ -1,0 +1,27 @@
+<header>
+  <div class="container">
+    <a routerLink="/" class="logo">Gyan Mitra</a>
+    <nav>
+      <ul>
+        <li><a routerLink="/workshop" *ngIf="user.isAdmin && (user.email==='pramakarthick@gmail.com')">WorkshopList</a></li>
+        <li><a routerLink="/admin" *ngIf="user.isAdmin && (user.email==='pramakarthick@gmail.com')">Admin</a></li>
+        <li>
+          <a href="https://goo.gl/maps/kDvWTuZmVeq8E5va6" target="_blank">Location</a>
+        </li>
+        <li *ngIf="!isAuth">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!isAuth">
+          <a routerLink="/register">Register</a>
+        </li>
+        <li *ngIf="isAuth" class="menu-container">
+          <a routerLink="/dashboard">{{user.name}}</a>
+          <div class="menu">
+            <a routerLink="/profile">Profile</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

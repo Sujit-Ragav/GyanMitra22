@@ -1,0 +1,16 @@
+<div class="bg">
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
+
+
+<div class="msg">
+  <h4 >{{success?'payment collected successfully!':'payment failed try after some time!'}}</h4></div>
+  <div class="status msg">
+  <p>Thankyou for registering in gyanmitra-mepco-2022</p>
+  <p class="mb-0">
+      <button (click)="logout()">Logout and come again</button><br>
+      <a *ngIf="!success" routerLink="/profile">Pay Again</a>
+  </p>
+</div>
+</div>

@@ -1,0 +1,61 @@
+<div class="Container">
+
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+
+
+  <div  class="partitions">
+  <h1 align="center" >Workshops</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of workshopss">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            {{product.name}}<br>
+          </div>
+          <div class="price">
+            <span>
+              {{product.price | currency:'INR'}}
+            </span>
+          </div>
+        </div>
+        </a>
+    </li>
+  </ul>
+  </div>
+  <div  class="partitions">
+  <h1 align="center">Events</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of eventss">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            <p class="Event-details">{{product.name}}</p>
+            <p class="Event-details">{{product.time}}</p>
+        </div>
+        </div>
+        </a>
+    </li>
+  </ul>
+  </div>
+  <div  class="partitions">
+  <h1  align="center" >Group Events</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of groupevents">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            <p class="Event-details">{{product.name}}</p>
+            <p class="Event-details">{{product.time}}</p>
+          </div>
+         
+        </div>
+        </a>
+    </li>
+</ul>
+  </div>
+  </div>

@@ -1,0 +1,159 @@
+<!-- <br><br>
+
+<button  (click)="RegEvent()">Event List</button>
+<h3>No of Students:{{this.count}}</h3> <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+  <i class="fa-solid fa-file-export"></i> Export to Excel
+</button>
+
+<table id="participantsEventTable" border="1">
+  <tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>College</th>
+  <th>Event</th>
+  <th>Payment Status</th>
+</tr>
+
+<tr *ngFor="let person of part">
+  <td>{{person.name}}</td>
+  <td>{{person.email}}</td>
+  <td>{{person.college}}</td>
+  <td>{{person.event}}</td>
+  <td><h4 *ngIf="person.eventPay">PAID</h4></td>
+</tr>
+
+</table> -->
+<div>
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+<default-button (click)="showadd=!showadd" text="Add Event"></default-button>
+<default-button (click)="showdelete=!showdelete" text="Delete Event"></default-button>
+</div>
+<div *ngIf='showadd' class="container">
+  <div class="details">
+    <app-title title=" New Event/Workshop ?"></app-title>
+    <form [formGroup]="neweventForm" (ngSubmit)="submit()">
+      <text-input
+      [control]="fc['name']"
+      [showErrorsWhen]="isSubmitted"
+      label="Name">
+    `</text-input>
+
+    <text-input
+    [control]="fc['time']"
+    [showErrorsWhen]="isSubmitted"
+    label="Time"
+    type="text">
+  `</text-input>
+
+
+  <text-input
+  [control]="fc['imageUrl']"
+  [showErrorsWhen]="isSubmitted"
+  label="ImageUrl"
+  type="text">
+`</text-input>
+
+<text-input
+[control]="fc['venue']"
+[showErrorsWhen]="isSubmitted"
+label="venue"
+type="text">
+`</text-input>
+
+<text-input
+[control]="fc['conductedby']"
+[showErrorsWhen]="isSubmitted"
+label="Club/Department">
+`</text-input>
+<br>
+<select formControlName="tname">
+  <option value="" disabled selected hidden>Category</option>
+  <option value="event">Individual Event</option>
+  <option value="groupevent">Group Event</option>
+  <option value="workshop">Workshop</option>
+</select>
+<br>
+<select formControlName="group">
+  <option value="" disabled selected hidden>Domain</option>
+  <option value="group1">Contraflexure</option>
+  <option value="group2">Zwitterion</option>
+  <option value="group3">Erudition</option>
+  <option value="group4">Vipravuha</option>
+  <option value="group5">Sunwins</option>
+  <option value="group6">Biologix</option>
+  <option value="group7">Exponents</option>
+  <option value="group8">Cossack</option>
+
+</select>
+
+<default-button text="Add Event"></default-button>
+
+    </form>
+  </div>
+</div>
+
+
+
+<div *ngIf='showdelete' class="Container">
+
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+
+
+  <div  class="partitions">
+  <h1 align="center" >Workshops</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of workshopss">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            {{product.name}}<br>
+          </div>
+          <div class="price">
+            <span>
+              {{product.price | currency:'INR'}}
+            </span>
+          </div>
+        </div>
+        </a>
+    </li>
+  </ul>
+  </div>
+  <div  class="partitions">
+  <h1 align="center">Events</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of eventss">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            <p class="Event-details">{{product.name}}</p>
+            <p class="Event-details">{{product.time}}</p>
+        </div>
+        </div>
+        </a>
+    </li>
+  </ul>
+  </div>
+  <div  class="partitions">
+  <h1  align="center" >Group Events</h1>
+  <ul class="Cards">
+    <li *ngFor="let product of groupevents">
+        <a routerLink="/event/{{product.id}}">
+          <img [src]="product.imageUrl" />
+        <div class="content">
+          <div class="name">
+            <p class="Event-details">{{product.name}}</p>
+            <p class="Event-details">{{product.time}}</p>
+          </div>
+         
+        </div>
+        </a>
+    </li>
+</ul>
+  </div>
+  </div>

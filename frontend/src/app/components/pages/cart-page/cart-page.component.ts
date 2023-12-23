@@ -1,0 +1,26 @@
+import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
+import { Cart } from 'src/app/shared/cart';
+import { CartItem } from 'src/app/shared/cartItem';
+
+@Component({
+  selector: 'app-cart-page',
+  templateUrl: './cart-page.component.html',
+  styleUrls: ['./cart-page.component.css']
+})
+export class CartPageComponent implements OnInit {
+  cart!:Cart;
+  constructor(private cartservice:CartService){
+    this.cartservice.getCartObservable().subscribe((cart)=>{
+      this.cart=cart;
+    })
+  }
+  ngOnInit(): void {
+
+  }
+  removeFromCart(cartItem:CartItem){
+      this.cartservice.removeFromCart(cartItem.product.id);
+  }
+
+}

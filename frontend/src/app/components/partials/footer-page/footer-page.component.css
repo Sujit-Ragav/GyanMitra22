@@ -1,0 +1,44 @@
+
+*{
+  margin: 0;
+  padding: 0;
+}
+footer{
+  background-color: black;
+  color: white;
+}
+
+h2{
+  padding: 1em 0 0 .5em;
+}
+
+.queries{
+	margin: 2% 0 0 0;
+	font-size:1.2em;
+}
+
+.developer{
+	margin: 2%;
+	padding:1em;
+	font-size:1.2em;
+	text-align:center;
+}
+
+
+
+.Contact{
+  padding: 0 0 0 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Contact-child{
+  margin-top: .8em;
+  flex: 1 0 21%;
+}
+
+.Contact-child p{
+  padding: 0 0 0 0.1em;
+  font-size: 0.8em;
+}

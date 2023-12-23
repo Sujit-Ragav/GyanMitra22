@@ -1,0 +1,25 @@
+<br><br>
+
+<button  (click)="RegWorkshop()">Workshop List</button>
+<h3>No of Students:{{this.count}}</h3> <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+  <i class="fa-solid fa-file-export"></i> Export to Excel
+</button>
+
+<table id="participantsWorshopTable" border="1">
+  <tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>College</th>
+  <th>Workshop</th>
+  <th>Payment Status</th>
+</tr>
+
+<tr *ngFor="let person of part">
+  <td>{{person.name}}</td>
+  <td>{{person.email}}</td>
+  <td>{{person.college}}</td>
+  <td>{{person.workshop}}</td>
+  <td><h4 *ngIf="person.isPayed">PAID</h4></td>
+</tr>
+
+</table>

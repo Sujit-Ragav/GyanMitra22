@@ -1,0 +1,121 @@
+<div class="container">
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+  <div *ngIf="!user.isAdmin">
+    <h1>{{eventTitle}}</h1>
+    <h3>Team Details</h3>
+    <form class="form_class" [formGroup]="TeamForm">
+
+          <div class="leader">
+
+          <label>Team Leader: </label>
+            <label> {{user.name}} </label>
+          <label>Email:</label>
+          <label > {{user.email}} </label>
+          <br><br>
+          <label >Team Name:</label>
+            <input type="text" formControlName="teamName"><br/>
+            </div>
+          <label>Team Member 2:</label>
+            <input type="text" formControlName="teammem2">
+
+          <label>Email:</label>
+            <input type="email" placeholder="abc@xyz.com" formControlName="email2" />
+            <label style="color:red"> (optional based on event rule)</label><br/>
+          <label>Team Member 3:</label>
+            <input type="text" formControlName="teammem3">
+          <label>Email:</label>
+
+            <input type="email" placeholder="abc@xyz.com" formControlName="email3" />
+            <label style="color:red"> (optional based on event rule)</label><br/>
+
+          <label>Team Member 4:</label>
+
+            <input type="text" formControlName="teammem4">
+
+          <label>Email:</label>
+
+            <input type="email" placeholder="abc@xyz.com" formControlName="email4" />
+            <label style="color:red"> (optional based on event rule)</label><br/>
+
+          <label>Team Member 5:</label>
+
+            <input type="text" formControlName="teammem5">
+
+          <label>Email:</label>
+
+            <input type="email" placeholder="abc@xyz.com" formControlName="email5" />
+            <label style="color:red"> (optional based on event rule)</label><br/>
+
+          <label>Team Member 6:</label>
+
+            <input type="text" formControlName="teammem6">
+
+          <label>Email:</label>
+
+            <input type="email" placeholder="abc@xyz.com" formControlName="email6" />
+            <label style="color:red"> (optional based on event rule )</label><br/>
+
+      <div class="btn">
+
+
+      <button *ngIf="user.eventPay else elseBlock" (click)="registerEvents()">Register</button>
+      <ng-template #elseBlock>
+        <button (click)="registerEvents()">Participate</button>
+      </ng-template>
+      </div>
+
+    </form>
+
+    </div>
+
+    <div *ngIf="user.isAdmin" class="admin">
+      <button  (click)="change()">Team List</button>
+      <div *ngIf="this.list">
+        <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+          <i class="fa-solid fa-file-export"></i> Export to Excel
+      </button>
+
+      <h3>No of Teams:{{this.count}}</h3><br>
+      <table id="list" >
+        <tr>
+          <th>Team Name</th>
+          <th>College Name</th>
+          <th>Team Members</th>
+          <th>Members Mail-id</th>
+        </tr>
+
+        <tr *ngFor="let team of List">
+          <td>{{team.teamName}}</td>
+          <td>{{team.teammem1.college}}</td>
+          <td>{{team.teammem1}}<br>{{team.teammem2}}<br>{{team.teammem3}}<br>{{team.teammem4}}<br>{{team.teammem5}}<br>{{team.teammem6}}</td>
+          <td>{{team.email1}}<br>{{team.email2}}<br>{{team.email3}}<br>{{team.email4}}<br>{{team.email5}}<br>{{team.email6}}</td>
+        </tr>
+
+
+      </table>
+      <button class="btn btn-primary" style="float: right;" (click)="exportToExcelPay()">
+        <i class="fa-solid fa-file-export"></i> Export to Excel
+    </button>
+      <table id="paymentlist">
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>COLLEGE</th>
+          <th>PAYSTATUS</th>
+        </tr>
+        <tr *ngFor="let user of payList">
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.college}}</td>
+          <td *ngIf="user.eventPay">PAID</td>
+          <td *ngIf="!user.eventPay">NOT PAID</td>
+      </tr>
+      </table>
+
+    </div>
+    </div>
+
+  </div>
+

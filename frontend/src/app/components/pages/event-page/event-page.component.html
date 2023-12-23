@@ -1,0 +1,171 @@
+<div class="bg">
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
+ <div *ngIf="product && !isShow" class="container">
+
+  <img [src]="product.imageUrl" [alt]="product.name"/>
+  <div class="details">
+    <div class="header">
+      <span class="name">{{product.name}}
+		</span>
+    </div>
+	<div>
+		<h3>Venue:		{{product.venue}}<br><br>
+		    Time:	9:00 AM - 4:45 PM<br><br>
+			Date:	17/02/2023<br><br>
+			Description :
+		</h3>
+		<p font-family="bold" align="justify">
+			{{product.desc}}
+    </p>
+	</div>
+    <div class="price">
+        <span>
+          {{product.price | currency:'INR'}}
+        </span>
+    </div>
+    <h4>Only one Workshop Can be participated,check before participating</h4>
+    <button *ngIf="!user.workshop" (click)="eventspay()" >Join Workshop</button>
+  </div>
+</div>
+
+
+<div *ngIf="product && isShow" class="container">
+  <img [src]="product.imageUrl" [alt]="product.name"/>
+  <div class="details">
+    <div class="header">
+      <span class="name">{{product.name}}
+        </span>
+    </div><div>
+		<h3>Venue:	{{product.venue}}<br><br>
+		    Time:	{{product.time}}<br><br>
+			Date:	18/02/2023<br><br>
+			Description:
+		</h3>
+		<p font-family="bold">
+			{{product.desc}}
+		</p>
+	</div>
+    <h3>Rules:</h3>
+    <div class="origins">
+        <ul>
+          <li *ngFor="let rule of product.rules">
+              {{rule}}
+          </li>
+        </ul>
+    </div>
+    <h3 *ngIf="isgroup">All the team members should pay the event fee</h3>
+    <button *ngIf="isgroup  ;else outerelseblock" routerLink="/teampage/{{product.id}}">Participate</button>
+    <ng-template #outerelseblock>
+      <!-- <button>Registration Closed</button> -->
+      
+        <button (click)="eventspay()" >Participate</button>
+      
+    </ng-template>
+  </div>
+</div>
+
+<!--
+<div *ngIf="user.isAdmin" class="admin">
+  <button  (click)="change()">Participant List</button>
+  <div *ngIf="this.list">
+  <div *ngIf="product.tname==='workshop'" class="workshop">
+  <h3>No of Participants:{{this.count}}</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>College</th>
+      <th>Payment Status</th>
+    </tr>
+  <div *ngFor="let person of participantList">
+    <tr>
+      <td>{{person.name}}</td>
+      <td>{{person.email}}</td>
+      <td>{{person.college}}</td>
+      <td><h4 *ngIf="person.isPayed">PAID</h4></td>
+    </tr>
+  </div>
+  </table>
+  </div>
+  <div *ngIf="product.tname==='event'" class="event">
+    <h3>No of Participants:{{this.count}}</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>College</th>
+      </tr>
+    <div *ngFor="let person of participantList">
+      <tr>
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.college}}</td>
+      </tr>
+    </div>
+    </table>
+    </div>
+    <div *ngIf="product.tname==='groupevent'" class="groupevent">
+      <button *ngIf="isgroup" routerLink="/teampage/{{product.id}}">Team List</button>
+    </div>
+  </div>
+  </div> -->
+
+  <div *ngIf="user.isAdmin" class="admin">
+    <button  (click)="change()">Participant List</button>
+    <div *ngIf="this.list">
+
+    <div *ngIf="product.tname==='workshop'" class="workshop">
+    <h3>No of Participants:{{this.count}}</h3>
+    <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+      <i class="fa-solid fa-file-export"></i> Export to Excel
+  </button>
+    <table id="list" >
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>College</th>
+        <th>Payment Status</th>
+        <th>Gender</th>
+      </tr>
+
+      <tr *ngFor="let person of participantList">
+        <td>{{person.name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.college}}</td>
+        <td><h4 *ngIf="person.isPayed">PAID</h4></td>
+        <td>{{person.gender}}</td>
+      </tr>
+
+    </table>
+    </div>
+    <div *ngIf="product.tname==='event'" class="event">
+      <h3>No of Participants:{{this.count}}</h3>
+      <button class="btn btn-primary" style="float: right;" (click)="exportToExcel()">
+        <i class="fa-solid fa-file-export"></i> Export to Excel
+    </button>
+      <table id="list">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>College</th>
+          <th>Payment Status</th>
+          <th>Gender</th>
+        </tr>
+        <tr *ngFor="let person of participantList">
+          <td>{{person.name}}</td>
+          <td>{{person.email}}</td>
+          <td>{{person.college}}</td>
+          <td><h4 *ngIf="person.eventPay">PAID</h4></td>
+          <td>{{person.gender}}</td>
+        </tr>
+      </table>
+      </div>
+      <div *ngIf="product.tname==='groupevent'" class="groupevent">
+        <button *ngIf="isgroup" routerLink="/teampage/{{product.id}}">Team List</button>
+      </div>
+    </div>
+    </div>
+
+</div>
